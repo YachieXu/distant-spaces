@@ -32,7 +32,7 @@ Our solution will levegerage the following Cisco technologies
 representing a minimum of 2 segments. List names here
 
 * Yachie Xu <yacxu@cisco.com> - Global Virtual Engnieering
-* Nour Zourob <nozourob@cisco.com> - Canada Commercial
+* Nour Zourob <nozourob@cisco.com> - Commercial
 
 
 ## Solution Components
