@@ -77,7 +77,7 @@ framework.hears(/help|what can i (do|say)|what (can|do) you do/i, function (bot,
 
 
 /* ----------------------------------------------------------------------------
-------------------------Number of Clients per floor----------------------------
+------------------------Client Count and Office Admin--------------------------
 -----------------------------------------------------------------------------*/
 
 framework.hears('Client Count', function (bot) {
@@ -97,8 +97,8 @@ framework.hears('Office Admin', function (bot) {
 });
 
 framework.on('attachmentAction', function (bot, trigger) {
-  let personname = trigger.person.displayName;
-  let personemail = trigger.person.emails[0];
+  let personname = trigger.person.displayName; //set name of user triggering the bot
+  let personemail = trigger.person.emails[0]; //set email of user triggering the bot
 
 
   if (cardstatus == 0) {//send floor_output_card
@@ -110,7 +110,7 @@ framework.on('attachmentAction', function (bot, trigger) {
 
 
     //floorkey - use this to convert floor id to human readable floor numbers
-    let floorkey = {"719d02e2b00e4535b6e095c0d757e44b" : "26", } 
+    let floorkey = {"719d02e2b00e4535b6e095c0d757e44b" : "26", } //format : {"floorid_1" : "floor_number_1", "floorid_2" : "floor_number_2"}
 
     //date - use this object to get the time of the query
     let date = new Date();
@@ -138,9 +138,9 @@ framework.on('attachmentAction', function (bot, trigger) {
         let client_res = (JSON.parse(data))
         //iterating over all floors, adding the count of each floor to the floorcount object
         for (let i of client_res.results) {
-          let floorid = i.floorID;
+          let floorid = i.floorID; //get floorid of current floor i
           let floor = floorkey[floorid]; //convert floorid into human readable floor numbers using floorkey object
-          floorcount[floor] = parseInt(i.count); 
+          floorcount[floor] = parseInt(i.count); //add the floor into the floorcount as a key, with the count as the value
         }
     });
 
@@ -173,15 +173,16 @@ framework.on('attachmentAction', function (bot, trigger) {
     cardstatus = 2;
   }
 
-  else if (cardstatus == 2){
-    let roomid = ""
-    console.log("Creating room!");
-    createroom(personname, personemail)
+  else if (cardstatus == 2){//create room
+    console.log("Creating room!"); 
+    createroom(personname, personemail) //call create room function
   }
 
 });
 
-// ------------------Helper Functions --------------------------------------
+/*-------------------------------------------------------------------------------
+----------------------------------Helper Functions-------------------------------
+-------------------------------------------------------------------------------*/
 
 //--------------------Get status based on people count function---------------
 function getstatus(count) {
@@ -232,6 +233,9 @@ function deletemsg(messageid){
   
   req.end()
 }
+
+
+
 //---------------------Create a Room function ------------------
 function createroom(personname, personemail){
   console.log("creating room!")
@@ -240,7 +244,7 @@ function createroom(personname, personemail){
   
   var postData = JSON.stringify(
     {
-    "title": personname + "'s Office Admin Request"
+    "title": personname + "'s Office Admin Request" //set title of new room
     }
   );
   
@@ -256,8 +260,6 @@ function createroom(personname, personemail){
   };
  
   var req = https.request(options, (res) => {
-    //console.log('statusCode:', res.statusCode);
-    //console.log('headers:', res.headers);
 
     let data = '';
     res.on('data', (chunk) => {
@@ -266,11 +268,9 @@ function createroom(personname, personemail){
 
     res.on('end', () => {
       data = JSON.parse(data);
-      //console.log("data" + data);
-      roomid = data.id;
-      //console.log("data.id: " + data.id);
-      addroom(roomid, officeadminemail);
-      addroom(roomid, personemail);
+      roomid = data.id; //find room id of newly created room
+      addroom(roomid, officeadminemail); //add office admin into room
+      addroom(roomid, personemail); //add user into room
     });
   });
 
@@ -289,8 +289,8 @@ function addroom(roomid, personemail) {
   
   var postData = JSON.stringify(
     {
-    "roomId": roomid,
-    "personEmail": personemail
+    "roomId": roomid, //roomid of room you want to add people to
+    "personEmail": personemail //email of person to add to room
     }
   );
   
@@ -306,8 +306,6 @@ function addroom(roomid, personemail) {
   };
  
   var req = https.request(options, (res) => {
-    //console.log('statusCode:', res.statusCode);
-    //console.log('headers:', res.headers);
 
     let data = '';
     res.on('data', (chunk) => {
@@ -316,7 +314,6 @@ function addroom(roomid, personemail) {
 
     res.on('end', () => {
       data = JSON.stringify(data);
-      //console.log(data);
     });
   });
 
