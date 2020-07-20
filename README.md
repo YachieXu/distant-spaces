@@ -1,23 +1,24 @@
 # Distant Spaces
 
-:Use DNA Spaces and Cisco Webex Teams to help with social distancing in workplace enviroments.
 
+:Use DNA Spaces and Cisco Webex Teams to help with social distancing in workplace enviroments.
 
 ## Business/Technical Challenge
 
-**TODO:** As the rise of social distancing practices comes to professional workplace environments, employees are becoming more aware of proper practices that will reduce the spread of COVID19. In particular, certain areas in the office such as meeting rooms, cafeterias and personal offices were often used with no regard to maintain acceptable distance (2 meters) between each employee.
+
+As the rise of social distancing practices comes to professional workplace environments, employees are becoming more aware of proper practices that will reduce the spread of COVID19. In particular, certain areas in the office such as cafeterias were often used with no regard to social distancing rules.
 
 ## Proposed Solution
 
 
-**TODO:** As such, Distant Spaces is a solution that tackles this issue by connecting to the office wireless system, based on catalyst 9k or Meraki APs, and reports to the employees WebEx teams whenever he/she is in an area with too many people within close proximity. This will require mapping of the office floor and devices to be connected to the corporate network. For example, if a meeting room should only accommodate 2 users, and 3 users end up occupying the room, all three employees will be notified via WebEx teams that they must follow social distancing practices, and a warning message will appear on the WebEx room device associated to that meeting room.
+As such, Distant Spaces is a solution that tackles this issue by connecting to the office wireless system, based on catalyst 9k or Meraki APs, tow webex teams bot to allow employees to query the bot before entering an area to check if it's safe to enter or not. This will require mapping of the office floor and devices to be connected to the corporate network. For example, before entering the floor where the cafeteria is located, an employee can query the bot and retrieve the following information: 
 
-To further enforce better social distancing practices, logs of areas that were over-crowded will be sent to the office administrators, to coordinate office improvements to accommodate the new norm. In addition, if an employee frequently ignores social distancing practice, they will be sent mandatory training to be completed. Employee also could send inquiry to Webex Bot and get updated information on space utilization.
-
+- Status of the floor (Safe, busy, very busy) based on client count
+- Sanitization station location (masks, hand sanitizer)
+- Office Admin contact info/ start a conversation
 
 ### Cisco Products Technologies/ Services
 
-**TODO:** List out major technologies included in the solution (ACI, DNAC, third party, etc) e.g
 
 Our solution will levegerage the following Cisco technologies
 
@@ -28,11 +29,8 @@ Our solution will levegerage the following Cisco technologies
 ## Team Members
 
 
-**TODO:** ASIC projects must consist of a minimum of 2 SE’s
-representing a minimum of 2 segments. List names here
-
 * Yachie Xu <yacxu@cisco.com> - Global Virtual Engnieering
-* Nour Zourob <nozourob@cisco.com> - Commercial
+* Nour Zourob <nozourob@cisco.com> - Commercial Systems Engineer
 
 
 ## Solution Components
