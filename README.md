@@ -33,7 +33,7 @@ Our solution will levegerage the following Cisco technologies
 
 * Yachie Xu <yacxu@cisco.com> - Global Virtual Engnieering
 * Nour Zourob <nozourob@cisco.com> - Commercial Systems Engineer
-
+* *Special thank you to Kelvin Cui - Technical Intern, for assisting in the project
 
 ## Solution Components
 
