@@ -42,7 +42,7 @@ Our solution will levegerage the following Cisco technologies
 
 Provide a brief overview of the components involved with this project. e.g Python /  -->
 
-![](Screen%20Shot%202020-07-20%20at%206.38.19%20PM.png)
+![](images/Screen%20Shot%202020-07-20%20at%206.38.19%20PM.png)
 
 ## Usage
 
@@ -50,9 +50,9 @@ Provide a brief overview of the components involved with this project. e.g Pytho
 
 Provide a brief overview of how to use the solution  -->
 
-![](Screen%20Shot%202020-07-20%20at%206.46.03%20PM.png)
+![](images/Screen%20Shot%202020-07-20%20at%206.46.03%20PM.png)
+![](images/Screen%20Shot%202020-07-20%20at%206.46.09%20PM.png)
 
-![](Screen%20Shot%202020-07-20%20at%206.46.09%20PM.png)
 
 ## Installation
 
