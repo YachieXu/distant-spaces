@@ -76,8 +76,15 @@ How to install or setup the project for use:
 
 ## Documentation
 
-Pointer to reference documentation for this project.
+Pointer to reference documentation for this project:
 
+* Webex Node Bot Framework: https://www.npmjs.com/package/webex-node-bot-framework
+
+* Webex Bot: https://developer.webex.com/docs/bots
+
+* Webex Bot Buttons and Cards: https://developer.webex.com/docs/cards
+
+* DNA Spaces Location Cloud API: https://developer.cisco.com/docs/dna-spaces/#!dna-spaces-location-cloud-api
 
 ## License
 
