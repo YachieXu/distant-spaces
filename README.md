@@ -65,7 +65,7 @@ How to install or setup the project for use.
 3. Clone this repository 
    git clone https://github.com/YachieXu/distant-spaces.git
 
-4.Configure config.json file in the code directory with Webex Bot Token
+4. Configure config.json file in the code directory with Webex Bot Token
    "token": “Bot Token”
 
 5. Finally, to install and start the application, run this command:
