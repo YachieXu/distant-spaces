@@ -75,6 +75,8 @@ How to install or setup the project for use:
 5. Finally, to install and start the application, run this command:
 
    $ npm start
+   
+   *Note: the demo uses hardcoded data as our DNA Spaces accounts did not have live data
 
 ## Documentation
 
