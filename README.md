@@ -56,20 +56,23 @@ Provide a brief overview of how to use the solution  -->
 
 ## Installation
 
-How to install or setup the project for use.
+How to install or setup the project for use:
 
 1. Node & npm (minimum tested version is node 8.0.0 or higher) and git installed on your machine
 
 2. Set up webex account and create a new bot
 
 3. Clone this repository 
+   
    git clone https://github.com/YachieXu/distant-spaces.git
 
 4. Configure config.json file in the code directory with Webex Bot Token
+   
    "token": “Bot Token”
 
 5. Finally, to install and start the application, run this command:
-  $ npm start
+
+   $ npm start
 
 ## Documentation
 
