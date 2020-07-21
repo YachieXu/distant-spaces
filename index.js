@@ -77,10 +77,10 @@ framework.hears(/help|what can i (do|say)|what (can|do) you do/i, function (bot,
 
 
 /* ----------------------------------------------------------------------------
-------------------------Client Count and Office Admin--------------------------
+------------------------Number of Clients per floor----------------------------
 -----------------------------------------------------------------------------*/
 
-framework.hears('Client Count', function (bot) {
+framework.hears('info', function (bot) {
   console.log("Client Count in the location");
   responded = true;
   //There would be an additional API call here to verify how many floors exist in the DNASpaces account, and set options for the floor_input_card
@@ -97,8 +97,8 @@ framework.hears('Office Admin', function (bot) {
 });
 
 framework.on('attachmentAction', function (bot, trigger) {
-  let personname = trigger.person.displayName; //set name of user triggering the bot
-  let personemail = trigger.person.emails[0]; //set email of user triggering the bot
+  let personname = trigger.person.displayName;
+  let personemail = trigger.person.emails[0];
 
 
   if (cardstatus == 0) {//send floor_output_card
@@ -110,7 +110,7 @@ framework.on('attachmentAction', function (bot, trigger) {
 
 
     //floorkey - use this to convert floor id to human readable floor numbers
-    let floorkey = {"719d02e2b00e4535b6e095c0d757e44b" : "26", } //format : {"floorid_1" : "floor_number_1", "floorid_2" : "floor_number_2"}
+    let floorkey = {"719d02e2b00e4535b6e095c0d757e44b" : "26", } 
 
     //date - use this object to get the time of the query
     let date = new Date();
@@ -138,9 +138,9 @@ framework.on('attachmentAction', function (bot, trigger) {
         let client_res = (JSON.parse(data))
         //iterating over all floors, adding the count of each floor to the floorcount object
         for (let i of client_res.results) {
-          let floorid = i.floorID; //get floorid of current floor i
+          let floorid = i.floorID;
           let floor = floorkey[floorid]; //convert floorid into human readable floor numbers using floorkey object
-          floorcount[floor] = parseInt(i.count); //add the floor into the floorcount as a key, with the count as the value
+          floorcount[floor] = parseInt(i.count); 
         }
     });
 
@@ -150,7 +150,7 @@ framework.on('attachmentAction', function (bot, trigger) {
     });
 
 
-    floorcount = {"26":8, "27":17, "28":25}; //DEMO ONLY - remove this line if using api
+    floorcount = {"27":8, "28":17, "29":25}; //DEMO ONLY - remove this line if using api
 
     let input = JSON.parse(JSON.stringify(trigger.attachmentAction, null, 2)); //parse data from previous card
     floor = input.inputs.floor //find which floor user selected
@@ -173,16 +173,15 @@ framework.on('attachmentAction', function (bot, trigger) {
     cardstatus = 2;
   }
 
-  else if (cardstatus == 2){//create room
-    console.log("Creating room!"); 
-    createroom(personname, personemail) //call create room function
+  else if (cardstatus == 2){
+    let roomid = ""
+    console.log("Creating room!");
+    createroom(personname, personemail)
   }
 
 });
 
-/*-------------------------------------------------------------------------------
-----------------------------------Helper Functions-------------------------------
--------------------------------------------------------------------------------*/
+// ------------------Helper Functions --------------------------------------
 
 //--------------------Get status based on people count function---------------
 function getstatus(count) {
@@ -233,9 +232,6 @@ function deletemsg(messageid){
   
   req.end()
 }
-
-
-
 //---------------------Create a Room function ------------------
 function createroom(personname, personemail){
   console.log("creating room!")
@@ -244,7 +240,7 @@ function createroom(personname, personemail){
   
   var postData = JSON.stringify(
     {
-    "title": personname + "'s Office Admin Request" //set title of new room
+    "title": personname + "'s Office Admin Request"
     }
   );
   
@@ -260,6 +256,8 @@ function createroom(personname, personemail){
   };
  
   var req = https.request(options, (res) => {
+    //console.log('statusCode:', res.statusCode);
+    //console.log('headers:', res.headers);
 
     let data = '';
     res.on('data', (chunk) => {
@@ -268,9 +266,11 @@ function createroom(personname, personemail){
 
     res.on('end', () => {
       data = JSON.parse(data);
-      roomid = data.id; //find room id of newly created room
-      addroom(roomid, officeadminemail); //add office admin into room
-      addroom(roomid, personemail); //add user into room
+      //console.log("data" + data);
+      roomid = data.id;
+      //console.log("data.id: " + data.id);
+      addroom(roomid, officeadminemail);
+      addroom(roomid, personemail);
     });
   });
 
@@ -289,8 +289,8 @@ function addroom(roomid, personemail) {
   
   var postData = JSON.stringify(
     {
-    "roomId": roomid, //roomid of room you want to add people to
-    "personEmail": personemail //email of person to add to room
+    "roomId": roomid,
+    "personEmail": personemail
     }
   );
   
@@ -306,6 +306,8 @@ function addroom(roomid, personemail) {
   };
  
   var req = https.request(options, (res) => {
+    //console.log('statusCode:', res.statusCode);
+    //console.log('headers:', res.headers);
 
     let data = '';
     res.on('data', (chunk) => {
@@ -314,6 +316,7 @@ function addroom(roomid, personemail) {
 
     res.on('end', () => {
       data = JSON.stringify(data);
+      //console.log(data);
     });
   });
 
@@ -374,16 +377,16 @@ let floor_input_card =
                   "placeholder": "Floor Choice",
                   "choices": [
                       {
-                          "title": "Floor 26",
-                          "value": "26"
-                      },
-                      {
                           "title": "Floor 27",
                           "value": "27"
                       },
                       {
                           "title": "Floor 28",
                           "value": "28"
+                      },
+                      {
+                          "title": "Floor 29",
+                          "value": "29"
                       }
                   ],
                   "style": "expanded",
@@ -516,7 +519,7 @@ let floor_output_card =
           "items": [
               {
                   "type": "TextBlock",
-                  "text": "WRP Resources:",
+                  "text": "Contact Office Admin:",
                   "weight": "Lighter",
                   "spacing": "None"
               },
@@ -588,7 +591,7 @@ let office_admin_card =
               },
               {
                   "type": "TextBlock",
-                  "text": "Tara Ward",
+                  "text": "Kelvin Cui",
                   "weight": "Bolder"
               }
           ]
@@ -603,7 +606,7 @@ let office_admin_card =
               },
               {
                   "type": "TextBlock",
-                  "text": "Email: taward@cisco.com"
+                  "text": "Email: kelvinwhcui@gmail.com"
               },
               {
                   "type": "ActionSet",
@@ -637,7 +640,7 @@ framework.hears(/.*/, function (bot, trigger) {
 
 function sendHelp(bot) {
   bot.say("markdown", 'If you are looking for floor density updates, please enter:', '\n\n ' +
-    '**Client Count**\n' 
+    '**info**\n' 
     )}
 
 
